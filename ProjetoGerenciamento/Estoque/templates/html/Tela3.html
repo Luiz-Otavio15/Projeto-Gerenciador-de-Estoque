@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Estoque 🏎️</title>
+    <link rel="stylesheet" href="{% static 'style2.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=close" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=inventory_2" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <header class="main-header">
+            <div class="header-content">
+                <div class="logo-area">
+                    <div class="logo-icon">
+                        <span class="material-symbols-outlined">inventory_2</span>
+                    </div>
+                    <div>
+                        <h1>Gerenciamento de Estoque</h1>
+                    </div>
+                </div>
+                <form action="{% url 'tela_gerenciamento' %}">
+                    <button id="btn-exit" class="btn-primary">
+                        <span class="material-symbols-outlined">close</span>
+                        Sair
+                    </button>
+                </form>
+            </div>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        </header>
+
+        
+
+        
+
+        <div class="modal-box-aliamento">
+            <div class="modal-box">
+                <form aciton="{% url 'tela_adicionar' %}" id="product-form" method="post">
+                    {% csrf_token %} 
+
+                    <div class="form-group">
+                        <label>Nome do Produto</label>
+                        <input type="text" name="nome_produto" id="f-name" required placeholder="Ex: Camiseta Básica" class="input-text" value="{{produto.nome}}">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Categoria</label>
+                        <input type="text" name="categoria" id="f-category" placeholder="Ex: Vestuário" class="input-text" value="{{produto.categoria}}">
+                    </div>
+
+                
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Quantidade</label>
+                            <input type="number" name="quantidade_estoque" id="f-qty" value="0" min="0" required class="input-text" value="{{produto.estoque}}">
+                        </div>
+                        <div class="form-group">
+                            <label>Valor Unitário (R$)</label>
+                            <input type="number" name="valor" id="f-price" required class="input-text" value="{{produto.preco}}">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit-modal">Adicionar Produto</button>
+                </form>
+            </div>
+        </div>
+    
+</body>
+</html>
