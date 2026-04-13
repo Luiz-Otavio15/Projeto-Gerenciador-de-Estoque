@@ -9,6 +9,11 @@ from Estoque.models import *
 def tela_gerenciamento(request):
     produtos = Produto.objects.all()
     
+    buscar = request.GET.get('buscar')
+
+    if buscar:
+        produtos = produtos.filter(nome__icontains=buscar)
+
     total_produto = produtos.count()
 
     itens_estoque = produtos.aggregate(
@@ -47,6 +52,7 @@ def tela_adicionar(request):
             estoque=quantidade_estoque,
             preco=valor
         )
+        produto.save()
         return render(request, 'html/tela4.html', {'sucesso': True})
     else:
         return render(request, 'html/tela3.html')

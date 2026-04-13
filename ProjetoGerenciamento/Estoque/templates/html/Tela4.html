@@ -55,7 +55,10 @@
             <div class="search-section">
                 <div class="search-wrapper">
                     <i data-lucide="search" class="search-icon"></i> 
-                    <input id="search-input" type="text" placeholder="Buscar produto..." class="search-input">
+                    <form action="{% url 'tela_gerenciamento' %}" method="get">
+                        <input  type="text" name="buscar" placeholder="Buscar produto..." class="search-input">
+                    </form>
+                    
                 </div>
         </div><!-- Product Grid -->
         <div class="products-section">
