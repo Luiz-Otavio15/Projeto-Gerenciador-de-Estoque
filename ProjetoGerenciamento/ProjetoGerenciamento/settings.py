@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-*-*ha*d)nx95(@rgo#y7q#3rxx5c+p$*lwql*9v4oeuv8po&23
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['gerenciamento.shardcloud.app', 'localhost', '127.0.0.1']
 
 
 # Application definition
