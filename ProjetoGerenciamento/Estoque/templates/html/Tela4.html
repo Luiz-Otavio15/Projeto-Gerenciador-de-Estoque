@@ -15,7 +15,7 @@
   
  </head>
  <body class="h-full">
-  <div id="app" class="h-full w-full overflow-auto scrollbar-thin" style="background: #0f1117;">
+  <div id="app" class="h-full w-full overflow-auto scrollbar-thin" >
    <!-- Header -->
     <header id="header">
         <div class="header-content">
@@ -61,54 +61,69 @@
                     
                 </div>
         </div><!-- Product Grid -->
-        <div class="products-section">
-            <div id="product-grid"></div>
-        </div><!-- Empty State -->
+    </div>
+
+<div class="cards-list">
+
     {% if produto %}
-        
-        {% for pro in produto%}
-        <div class="product-card " data-id="">
-                <div class="product-card-content">
-                    
-                    <div class="product-header">
-                    
+        {% for pro in produto %}
+
+        <div class="product-card">
+            <div class="product-card-content">
+
+                <!-- HEADER -->
+                <div class="product-header">
                     <div>
-                        <h3 class="product-title">{{pro.nome}}</h3>
-                        <p class="product-category">{{pro.categoria}}</p>
+                        <h3 class="product-title">{{ pro.nome }}</h3>
+                        <p class="product-category">{{ pro.categoria }}</p>
                     </div>
                     <span class="material-symbols-outlined">package_2</span>
-                    </div>
-                    <div class="product-stats">
+                </div>
+
+                <!-- STATS -->
+                <div class="product-stats">
                     <div class="stat-box">
                         <p class="stat-box-label">Qtd</p>
-                        <p class="stat-box-value">{{pro.estoque}}</p>
+                        <p class="stat-box-value">{{ pro.estoque }}</p>
                     </div>
+
                     <div class="stat-box">
                         <p class="stat-box-label">Unit.</p>
-                        <p class="stat-box-value">{{pro.preco|intcomma }}</p>
+                        <p class="stat-box-value">
+                            R$ {{ pro.preco|intcomma }}
+                        </p>
                     </div>
+
                     <div class="stat-box accent">
                         <p class="stat-box-label">Total</p>
-                        <p class="stat-box-value">{{pro.total|intcomma }}</p>
-                    </div>
-                    </div>
-                    <div class="product-actions">
-                            {% csrf_token %} 
-                            <button class="btn-action" onclick="window.location.href='/editar/{{ pro.id }}/'">
-                                <i data-lucide="edit"></i> Editar
-                            </button>
-                        
-                        
-                    <button onclick="openDelete('${p.__backendId}')" class="btn-action btn-delete">
-                        <i data-lucide="trash-2"></i> Excluir
-                    </button>
+                        <p class="stat-box-value">
+                            R$ {{ pro.total|intcomma }}
+                        </p>
                     </div>
                 </div>
+
+                <!-- ACTIONS -->
+                <div class="product-actions">
+
+                    <a href="{% url 'tela_editar' pro.id %}" class="btn-action">
+                        <i data-lucide="edit"></i> Editar
+                    </a>
+
+                    <button onclick="" class="btn-action btn-delete">
+                        <i data-lucide="trash-2"></i> Excluir
+                    </button>
+
+                </div>
+
             </div>
         </div>
-    {% endfor %}
-{% else %}
-    <div id="empty-state" class="empty-state hidden">
+
+        {% endfor %}
+
+    {% else %}
+
+        <!-- EMPTY STATE -->
+        <div class="empty-state">
             <div class="empty-container">
                 <div class="empty-icon">
                     <span class="material-symbols-outlined">inventory_2</span>
@@ -117,20 +132,10 @@
                 <p class="empty-text">Clique em "Novo Produto" para começar</p>
             </div>
         </div>
-{% endif %}
-   <div id="delete-overlay" class="modal-overlay">
-    <div class="delete-modal">
-     <div class="delete-icon">
-      <i data-lucide="trash-2"></i>
-     </div>
-     <p class="delete-title">Excluir produto?</p>
-     <p id="delete-name" class="delete-text">Este item será removido</p>
-     <div class="delete-actions">
-      <button id="delete-cancel">Cancelar</button> <button id="delete-confirm" class="btn-delete-confirm">Excluir</button>
-     </div>
-    </div>
-   </div><!-- Toast -->
-   <div id="toast"></div>
-  </div>
 
+    {% endif %}
+
+</div>
+    
+</body>
 </html>
